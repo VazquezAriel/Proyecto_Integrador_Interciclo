@@ -13,4 +13,21 @@ import ec.edu.ups.modelo.Administrador;
  */
 public class ControladorAdministrador extends ControladorGenerico<Administrador>{
     
+    private Administrador administradorLogeado;
+    
+    public boolean validarAdministrador(String usuario, String contraseña) {
+        
+        for (Administrador administrador : getListado()) {
+            if (administrador.getUsuario().equals(usuario) && administrador.getContraseña().equals(contraseña)) {
+                this.administradorLogeado = administrador;
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public Administrador getAdministradorLogeado() {
+        return administradorLogeado;
+    }
+    
 }
