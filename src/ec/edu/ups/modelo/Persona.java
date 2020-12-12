@@ -5,11 +5,13 @@
  */
 package ec.edu.ups.modelo;
 
+import java.io.Serializable;
+
 /**
  *
  * @author ariel
  */
-public class Persona {
+public class Persona implements Serializable{
     
     private int id;
     private String nombre;
@@ -19,6 +21,10 @@ public class Persona {
     private String email;
 
     public Persona() {
+    }
+
+    public Persona(int id) {
+        this.id = id;
     }
     
     public Persona(int id, String nombre, String apellido, String direccion, String telefono, String email) {

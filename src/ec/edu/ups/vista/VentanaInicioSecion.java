@@ -5,8 +5,12 @@
  */
 package ec.edu.ups.vista;
 
-import ec.edu.ups.controlador.ControladorAdministrador;
+import ec.edu.ups.controlador.ControladorAdmin;
+import ec.edu.ups.controlador.ControladorCliente;
+import ec.edu.ups.controlador.ControladorParqueadero;
 import ec.edu.ups.controlador.ControladorUsuario;
+import ec.edu.ups.controlador.ControladorVehiculo;
+import java.io.IOException;
 import javax.swing.JOptionPane;
 
 /**
@@ -15,21 +19,45 @@ import javax.swing.JOptionPane;
  */
 public class VentanaInicioSecion extends javax.swing.JFrame {
 
+    //Archivos
+    public static String rutaAdmin= "C:/Users/ariel/Documents/NetBeansProjects/ProyectoIntegrador(ProgramacionAplicada)/src/Archivos/admin.dat";
+    public static String rutaUsuarios = "C:/Users/ariel/Documents/NetBeansProjects/ProyectoIntegrador(ProgramacionAplicada)/src/Archivos/clientes.dat";
+    public static String rutaParqueaderos = "C:/Users/ariel/Documents/NetBeansProjects/ProyectoIntegrador(ProgramacionAplicada)/src/Archivos/parqueaderos.dat";
+    public static String rutaClientes = "C:/Users/ariel/Documents/NetBeansProjects/ProyectoIntegrador(ProgramacionAplicada)/src/Archivos/usuarios.dat";
+    public static String rutaVehiculos = "C:/Users/ariel/Documents/NetBeansProjects/ProyectoIntegrador(ProgramacionAplicada)/src/Archivos/vehiculos.dat";
+    
     //Ventana
-    VentanaNuevoAdministrador ventanaNuevoAdministrador;
     VentanaPrincipal ventanaPrincipal;
 
     //Controladores
-    ControladorAdministrador controladorAdministrador;
+    ControladorAdmin controladorAdmin;
     ControladorUsuario controladorUsuario;
+    ControladorParqueadero controladorParqueadero;
+    ControladorCliente controladorCliente;
+    ControladorVehiculo controladorVehiculo;
 
     public VentanaInicioSecion() {
         initComponents();
 
-        controladorAdministrador = new ControladorAdministrador();
+        controladorAdmin = ControladorAdmin.getInstance();
         controladorUsuario = new ControladorUsuario();
-        ventanaNuevoAdministrador = new VentanaNuevoAdministrador(controladorAdministrador);
-        ventanaPrincipal = new VentanaPrincipal(this);
+        controladorParqueadero = new ControladorParqueadero();
+        controladorCliente = new ControladorCliente();
+        controladorVehiculo = new ControladorVehiculo();
+        
+        ventanaPrincipal = new VentanaPrincipal(this, controladorAdmin, controladorUsuario, controladorParqueadero,controladorCliente, controladorVehiculo);
+        
+        try {
+            
+            controladorAdmin.cargarDatos(rutaAdmin);
+            controladorUsuario.cargarDatos(rutaUsuarios);
+            controladorParqueadero.cargarDatos(rutaParqueaderos);
+            controladorCliente.cargarDatos(rutaClientes);
+            controladorVehiculo.cargarDatos(rutaVehiculos);
+            
+        }catch (IOException | ClassNotFoundException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
     }
 
     public void restaurar() {
@@ -55,10 +83,14 @@ public class VentanaInicioSecion extends javax.swing.JFrame {
         jLabelParqueaderos = new javax.swing.JLabel();
         jLabelSistemaDe = new javax.swing.JLabel();
         jLabelImagen = new javax.swing.JLabel();
-        jButtonNuevoAdmin = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(136, 173, 176));
 
@@ -159,14 +191,6 @@ public class VentanaInicioSecion extends javax.swing.JFrame {
 
         jLabelImagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/garaje (2).png"))); // NOI18N
 
-        jButtonNuevoAdmin.setBackground(new java.awt.Color(0, 153, 204));
-        jButtonNuevoAdmin.setText("Nuevo Administrador");
-        jButtonNuevoAdmin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonNuevoAdminActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -174,22 +198,16 @@ public class VentanaInicioSecion extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(55, 55, 55)
+                        .addComponent(jLabelSistemaDe))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(38, 38, 38)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(55, 55, 55)
-                                .addComponent(jLabelSistemaDe))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(38, 38, 38)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(10, 10, 10)
-                                        .addComponent(jLabelImagen))
-                                    .addComponent(jLabelParqueaderos))))
-                        .addGap(0, 29, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButtonNuevoAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                                .addGap(10, 10, 10)
+                                .addComponent(jLabelImagen))
+                            .addComponent(jLabelParqueaderos))))
+                .addGap(18, 47, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -202,8 +220,6 @@ public class VentanaInicioSecion extends javax.swing.JFrame {
                 .addComponent(jLabelParqueaderos)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabelImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(49, 49, 49)
-                .addComponent(jButtonNuevoAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -222,12 +238,18 @@ public class VentanaInicioSecion extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonNuevoAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNuevoAdminActionPerformed
-        ventanaNuevoAdministrador.restaurar();
-        ventanaNuevoAdministrador.setVisible(true);
-    }//GEN-LAST:event_jButtonNuevoAdminActionPerformed
-
     private void jButtonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalirActionPerformed
+        try {
+            
+            controladorAdmin.guardarDatos(rutaAdmin);
+            controladorUsuario.guardarDatos(rutaUsuarios);
+            controladorParqueadero.guardarDatos(rutaParqueaderos);
+            controladorCliente.guardarDatos(rutaClientes);
+            controladorVehiculo.guardarDatos(rutaVehiculos);
+            
+        } catch (IOException ex) {
+           JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
         System.exit(0);
     }//GEN-LAST:event_jButtonSalirActionPerformed
 
@@ -236,28 +258,63 @@ public class VentanaInicioSecion extends javax.swing.JFrame {
         var tipoUsuario = jComboBoxTipoUsuario.getSelectedItem().toString();
 
         if (tipoUsuario.equals("Administrador")) {
-            if (controladorAdministrador.validarAdministrador(jTextFieldUsuario.getText(), new String(jPassword.getPassword()))) {
-                JOptionPane.showMessageDialog(this, "Bienvenido de nuevo " + controladorAdministrador.getAdministradorLogeado());
+            if (controladorAdmin.validarAdministrador(jTextFieldUsuario.getText(), new String(jPassword.getPassword()))) {
+                JOptionPane.showMessageDialog(this, "Bienvenido de nuevo " + controladorAdmin.getAdministrador().getNombre());
                 ventanaPrincipal.setVisible(true);
+                ventanaPrincipal.getjMenuParqueaderos().setEnabled(true);
+                ventanaPrincipal.getjMenuUsuarios().setEnabled(true);
+                ventanaPrincipal.getjMenuItemUsuarioSimple().setEnabled(false);
+                ventanaPrincipal.getjMenuItemAdministrador().setEnabled(true);
+
+                if (controladorParqueadero.getListado().isEmpty()) {
+                    ventanaPrincipal.getjMenuItemRegistros().setEnabled(false);
+                    ventanaPrincipal.getjMenuItemFacturas().setEnabled(false);
+                } else {
+                    controladorParqueadero.setParqueaderoActual(controladorParqueadero.getListado().get(0));
+                }
+
                 this.setVisible(false);
             } else {
                 JOptionPane.showMessageDialog(this, "Usuario o Contraseña incorrectos. Porfavor vuelva a intentarlo");
             }
-            
+
         } else if (tipoUsuario.equals("Usuario Simple")) {
             if (controladorUsuario.validarUsuario(jTextFieldUsuario.getText(), new String(jPassword.getPassword()))) {
                 JOptionPane.showMessageDialog(this, "Bienvenido de nuevo " + controladorUsuario.getUsuarioLogeado());
+                ventanaPrincipal.setVisible(true);
+                ventanaPrincipal.getjMenuParqueaderos().setEnabled(false);
+                ventanaPrincipal.getjMenuUsuarios().setEnabled(false);
+                ventanaPrincipal.getjMenuItemRegistros().setEnabled(true);
+                ventanaPrincipal.getjMenuItemFacturas().setEnabled(true);
+                ventanaPrincipal.getjMenuItemUsuarioSimple().setEnabled(true);
+                ventanaPrincipal.getjMenuItemAdministrador().setEnabled(false);
+                controladorParqueadero.setParqueaderoActual(controladorUsuario.getUsuarioLogeado().getParqueadero());
+                this.setVisible(false);
             } else {
                 JOptionPane.showMessageDialog(this, "Usuario o Contraseña incorrectos. Porfavor vuelva a intentarlo");
             }
         }
-        
+
         restaurar();
     }//GEN-LAST:event_jButtonIngresarActionPerformed
 
     private void jComboBoxTipoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTipoUsuarioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxTipoUsuarioActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        try {
+            
+            controladorAdmin.guardarDatos(rutaAdmin);
+            controladorUsuario.guardarDatos(rutaUsuarios);
+            controladorParqueadero.guardarDatos(rutaParqueaderos);
+            controladorCliente.guardarDatos(rutaClientes);
+            controladorVehiculo.guardarDatos(rutaVehiculos);
+            
+        } catch (IOException ex) {
+           JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
@@ -296,7 +353,6 @@ public class VentanaInicioSecion extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonIngresar;
-    private javax.swing.JButton jButtonNuevoAdmin;
     private javax.swing.JButton jButtonSalir;
     private javax.swing.JComboBox<String> jComboBoxTipoUsuario;
     private javax.swing.JLabel jLabelContraseña;

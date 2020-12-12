@@ -14,7 +14,7 @@ import java.time.LocalDate;
 public class Contrato {
     
     private int id;
-    private Vehiculo vehiculo;
+    private Cliente cliente;
     private int duracionEnDias;
     private LocalDate inicioContrato;
     private LocalDate finContrato;
@@ -22,9 +22,9 @@ public class Contrato {
     public Contrato() {
     }
 
-    public Contrato(int id, Vehiculo vehiculo, int duracionEnDias, LocalDate inicioContrato, LocalDate finContrato) {
+    public Contrato(int id, Cliente cliente, int duracionEnDias, LocalDate inicioContrato, LocalDate finContrato) {
         this.id = id;
-        this.vehiculo = vehiculo;
+        this.cliente = cliente;
         this.duracionEnDias = duracionEnDias;
         this.inicioContrato = inicioContrato;
         this.finContrato = finContrato;
@@ -38,14 +38,14 @@ public class Contrato {
         this.id = id;
     }
 
-    public Vehiculo getVehiculo() {
-        return vehiculo;
+    public Cliente getCliente() {
+        return cliente;
     }
 
-    public void setVehiculo(Vehiculo vehiculo) {
-        this.vehiculo = vehiculo;
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
-
+    
     public int getDuracionEnDias() {
         return duracionEnDias;
     }

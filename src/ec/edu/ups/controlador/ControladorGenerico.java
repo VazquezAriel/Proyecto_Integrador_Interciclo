@@ -48,20 +48,13 @@ public class ControladorGenerico<T> {
 
     public boolean actualizar(T objetoActalizado) {
         if (listado.contains(objetoActalizado)) {
-            listado.add(listado.indexOf(objetoActalizado), objetoActalizado);
+            listado.set(listado.indexOf(objetoActalizado), objetoActalizado);
         }
         return false;
     }
 
     public boolean eliminar(T objeto) {
         return listado.remove(objeto);
-    }
-
-    public int generarId() {
-        if (listado.size() > 0) {
-            return listado.indexOf(listado.get(listado.size() - 1)) + 2;
-        }
-        return 1;
     }
 
     public List<T> getListado() {

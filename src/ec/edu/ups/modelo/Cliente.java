@@ -12,9 +12,12 @@ package ec.edu.ups.modelo;
 public class Cliente extends Persona{
     
     private String cedula;
-    private double valorDescuento;
 
     public Cliente() {
+    }
+
+    public Cliente(int id) {
+        super(id);
     }
 
     public Cliente(String cedula, int id, String nombre, String apellido, String direccion, String telefono, String email) {
@@ -29,14 +32,5 @@ public class Cliente extends Persona{
     public void setCedula(String cedula) {
         this.cedula = cedula;
     }
-
-    public double getValorDescuento() {
-        return valorDescuento;
-    }
-
-    public void setValorDescuento(double valorDescuento) {
-        this.valorDescuento = valorDescuento;
-    }
-    
     
 }

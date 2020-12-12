@@ -5,30 +5,33 @@
  */
 package ec.edu.ups.modelo;
 
-import ec.edu.ups.controlador.ControladorGenerico;
+import java.io.Serializable;
+
 
 /**
  *
  * @author ariel
  */
-public class Administrador extends Persona{
+public class Administrador implements Serializable{
     
     private String usuario;
     private String contraseña;
-    private ControladorGenerico<Parqueadero> parqueaderos;
-    private ControladorGenerico<Usuario> trabajadores;
+    private String nombre;
 
-    public Administrador() {
-    }
-
-    public Administrador(String usuario, String contraseña, int id, String nombre, String apellido, String direccion, String telefono, String email) {
-        super(id, nombre, apellido, direccion, telefono, email);
+    public Administrador(String usuario, String contraseña, String nombre) {
         this.usuario = usuario;
         this.contraseña = contraseña;
-        this.parqueaderos = new ControladorGenerico<>();
-        this.trabajadores = new ControladorGenerico<>();
+        this.nombre = nombre;
+    }
+    
+    public String getNombre() {
+        return nombre;
     }
 
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+    
     public String getUsuario() {
         return usuario;
     }
@@ -43,22 +46,6 @@ public class Administrador extends Persona{
 
     public void setContraseña(String contraseña) {
         this.contraseña = contraseña;
-    }
-
-    public ControladorGenerico<Parqueadero> getParqueaderos() {
-        return parqueaderos;
-    }
-
-    public void setParqueaderos(ControladorGenerico<Parqueadero> parqueaderos) {
-        this.parqueaderos = parqueaderos;
-    }
-
-    public ControladorGenerico<Usuario> getTrabajadores() {
-        return trabajadores;
-    }
-
-    public void setTrabajadores(ControladorGenerico<Usuario> trabajadores) {
-        this.trabajadores = trabajadores;
     }
     
 }

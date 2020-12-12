@@ -5,43 +5,54 @@
  */
 package ec.edu.ups.modelo;
 
-import ec.edu.ups.controlador.ControladorGenerico;
+import java.io.Serializable;
+import java.util.List;
 
 /**
  *
  * @author ariel
  */
-public class Parqueadero {
+public class Parqueadero implements Serializable{
     
     private int id;
+    private String nombre;
     private String direccion;
     private double costoPorHora;
     private int totalEspacios;
     private int espaciosDisponibles;
-    private ControladorGenerico<Contrato> contratos;
-    private ControladorGenerico<RegistroEstacionamiento> registroEstacionamientos;
-    private ControladorGenerico<Factura> facturas;
+    private List<Contrato> contratos;
+    private List<RegistroEstacionamiento> registroEstacionamientos;
+    private List<Factura> facturas;
 
     public Parqueadero() {
     }
 
-    public Parqueadero(int id, String direccion, double costoPorHora, int totalEspacios) {
+    public Parqueadero(int id) {
         this.id = id;
+    }
+
+    public Parqueadero(int id, String nombre, String direccion, double costoPorHora, int totalEspacios) {
+        this.id = id;
+        this.nombre = nombre;
         this.direccion = direccion;
         this.costoPorHora = costoPorHora;
         this.totalEspacios = totalEspacios;
-        this.espaciosDisponibles = 0;
-        this.contratos = new ControladorGenerico<>() ;
-        this.registroEstacionamientos = new ControladorGenerico<>();
-        this.facturas = new ControladorGenerico<>();
     }
-
+    
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public String getDireccion() {
@@ -76,30 +87,30 @@ public class Parqueadero {
         this.espaciosDisponibles = espaciosDisponibles;
     }
 
-    public ControladorGenerico<Contrato> getContratos() {
+    public List<Contrato> getContratos() {
         return contratos;
     }
 
-    public void setContratos(ControladorGenerico<Contrato> contratos) {
+    public void setContratos(List<Contrato> contratos) {
         this.contratos = contratos;
     }
 
-    public ControladorGenerico<RegistroEstacionamiento> getRegistroEstacionamientos() {
+    public List<RegistroEstacionamiento> getRegistroEstacionamientos() {
         return registroEstacionamientos;
     }
 
-    public void setRegistroEstacionamientos(ControladorGenerico<RegistroEstacionamiento> registroEstacionamientos) {
+    public void setRegistroEstacionamientos(List<RegistroEstacionamiento> registroEstacionamientos) {
         this.registroEstacionamientos = registroEstacionamientos;
     }
 
-    public ControladorGenerico<Factura> getFacturas() {
+    public List<Factura> getFacturas() {
         return facturas;
     }
 
-    public void setFacturas(ControladorGenerico<Factura> facturas) {
+    public void setFacturas(List<Factura> facturas) {
         this.facturas = facturas;
     }
-
+    
     @Override
     public int hashCode() {
         int hash = 5;
@@ -124,4 +135,11 @@ public class Parqueadero {
         }
         return true;
     }
+
+    @Override
+    public String toString() {
+        return nombre;
+    }
+    
+    
 }

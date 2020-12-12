@@ -5,16 +5,27 @@
  */
 package ec.edu.ups.modelo;
 
+import java.io.Serializable;
+
 /**
  *
  * @author ariel
  */
-public class Vehiculo {
+public class Vehiculo implements Serializable{
     
     private int id;
     private String placa;
     private String color;
-    private Cliente dueño;
+
+    public Vehiculo(int id) {
+        this.id = id;
+    }
+
+    public Vehiculo(int id, String placa, String color) {
+        this.id = id;
+        this.placa = placa;
+        this.color = color;
+    }
 
     public String getPlaca() {
         return placa;
@@ -32,12 +43,12 @@ public class Vehiculo {
         this.color = color;
     }
 
-    public Cliente getDueño() {
-        return dueño;
+    public int getId() {
+        return id;
     }
 
-    public void setDueño(Cliente dueño) {
-        this.dueño = dueño;
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override
@@ -64,6 +75,5 @@ public class Vehiculo {
         }
         return true;
     }
-    
     
 }
