@@ -11,6 +11,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,11 +19,11 @@ import java.util.List;
  *
  * @author ariel
  */
-public class ControladorGenerico<T> {
+public class ControladorGenerico<T> implements Serializable{
     
     private List<T> listado;
 
-    public ControladorGenerico() {
+    public ControladorGenerico(){
         listado = new ArrayList<T>();
     }
     

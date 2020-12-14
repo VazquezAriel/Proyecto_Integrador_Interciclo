@@ -5,38 +5,37 @@
  */
 package ec.edu.ups.modelo;
 
+import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
 
 /**
  *
  * @author ariel
  */
-public class RegistroEstacionamiento {
+public class RegistroEstacionamiento implements Serializable{
     
     private int id;
     private LocalTime horaEntrada;
     private LocalTime horaSalida;
     private Vehiculo vehiculo;
+    private Estacionamiento estacionamiento;
     private String estado;
     private double costoTotal;
+    
 
     public RegistroEstacionamiento() {
     }
 
-    public RegistroEstacionamiento(LocalTime horaEntrada, LocalTime horaSalida, Vehiculo vehiculo, String estado, double costoTotal) {
-        this.horaEntrada = horaEntrada;
-        this.horaSalida = horaSalida;
-        this.vehiculo = vehiculo;
-        this.estado = estado;
-        this.costoTotal = costoTotal;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
+    public RegistroEstacionamiento(int id, LocalTime horaEntrada, Vehiculo vehiculo, Estacionamiento estacionamiento) {
         this.id = id;
+        this.horaEntrada = horaEntrada;
+        this.vehiculo = vehiculo;
+        this.estacionamiento = estacionamiento;
+        this.estado = "En el Parqueadero";
+        this.costoTotal = 0.0;
     }
 
     public LocalTime getHoraEntrada() {
@@ -53,6 +52,22 @@ public class RegistroEstacionamiento {
 
     public void setHoraSalida(LocalTime horaSalida) {
         this.horaSalida = horaSalida;
+    }
+    
+    public Estacionamiento getEstacionamiento() {
+        return estacionamiento;
+    }
+
+    public void setEstacionamiento(Estacionamiento estacionamiento) {
+        this.estacionamiento = estacionamiento;
+    }
+    
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public Vehiculo getVehiculo() {

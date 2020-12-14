@@ -5,23 +5,47 @@
  */
 package ec.edu.ups.modelo;
 
+import java.io.Serializable;
+import java.time.LocalDate;
+
 /**
  *
  * @author ariel
  */
-public class Factura {
+public class Factura implements Serializable{
     
     private int id;
     private Cliente cliente;
+    private double descuento;
+    private LocalDate fecha;
     private double costoTotal;
 
     public Factura() {
     }
 
-    public Factura(int id, Cliente cliente, double costoTotal) {
+    public Factura(int id, Cliente cliente, double descuento, LocalDate fecha, double costoTotal) {
         this.id = id;
         this.cliente = cliente;
+        this.descuento = descuento;
+        this.fecha = fecha;
         this.costoTotal = costoTotal;
+        
+    }
+
+    public double getDescuento() {
+        return descuento;
+    }
+
+    public void setDescuento(double descuento) {
+        this.descuento = descuento;
+    }
+
+    public LocalDate getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(LocalDate fecha) {
+        this.fecha = fecha;
     }
 
     public int getId() {

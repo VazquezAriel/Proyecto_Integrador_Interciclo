@@ -13,14 +13,21 @@ import java.util.stream.Collectors;
  *
  * @author ariel
  */
-public class ListaContrato extends ControladorGenerico<Contrato>{
+public class ListaContrato extends ControladorGenerico<Contrato> {
     
     public List<Contrato> buscarPorNombreCliente(String nombre) {
         return getListado().stream().filter(c -> c.getCliente().getNombre().equals(nombre)).collect(Collectors.toList());
     }
     
-    public List<Contrato> buscarPorNombreCedula(String cedula) {
+    public List<Contrato> buscarPorCedulaCliente(String cedula) {
         return getListado().stream().filter(c -> c.getCliente().getCedula().equals(cedula)).collect(Collectors.toList());
+    }
+    
+    public int generarId() {
+        if(getListado().size() > 0) {
+            return getListado().get(getListado().size() -1 ).getId() + 1;
+        }
+        return 1;
     }
     
 }

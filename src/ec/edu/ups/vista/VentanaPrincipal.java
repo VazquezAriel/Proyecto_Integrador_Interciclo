@@ -10,7 +10,6 @@ import ec.edu.ups.controlador.ControladorCliente;
 import ec.edu.ups.controlador.ControladorParqueadero;
 import ec.edu.ups.controlador.ControladorUsuario;
 import ec.edu.ups.controlador.ControladorVehiculo;
-import ec.edu.ups.modelo.Parqueadero;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
@@ -36,6 +35,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private VentanaUsuarios ventanaUsuarios;
     private VentanaAdministrador ventanaAdministrador;
     private VentanaUsuario ventanaUsuario;
+    private VentanaFacturas ventanaFacturas;
+    private VentanaEstacionamientos ventanaEstacionamientos;
+    private VentanaContratos ventanaContratos;
+    private VentanaNuevoRegistro ventanaNuevoRegistro;
+    private VentanaRegistros ventanaRegistros;
+    private VentanaRegistroSalida ventanaRegistroSalida;
     
     //Controladores
     ControladorCliente controladorCliente;
@@ -55,7 +60,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         
         this.ventanaInicioSecion = ventanaInicioSecion;
         this.ventanaNuevoCliente = new VentanaNuevoCliente(controladorCliente);
-        this.ventanaNuevoContrato = new VentanaNuevoContrato(controladorParqueadero);
+        this.ventanaNuevoContrato = new VentanaNuevoContrato(controladorParqueadero, controladorCliente, ventanaNuevoCliente);
         this.ventanaNuevoParqueadero = new VentanaNuevoParqueadero(controladorParqueadero);
         this.ventanaNuevoUsuario = new VentanaNuevoUsuario(controladorUsuario, controladorParqueadero);
         this.ventanaNuevoVehiculo = new VentanaNuevoVehiculo(controladorVehiculo);
@@ -66,6 +71,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         this.ventanaUsuarios = new VentanaUsuarios(controladorParqueadero, controladorUsuario);
         this.ventanaAdministrador = new VentanaAdministrador(controladorAdmin);
         this.ventanaUsuario = new VentanaUsuario(controladorUsuario);
+        this.ventanaFacturas = new VentanaFacturas(controladorParqueadero);
+        this.ventanaEstacionamientos = new VentanaEstacionamientos(controladorParqueadero);
+        this.ventanaContratos = new VentanaContratos(controladorParqueadero);
+        this.ventanaNuevoRegistro = new VentanaNuevoRegistro(controladorParqueadero, controladorVehiculo, ventanaNuevoVehiculo);
+        this.ventanaRegistroSalida = new VentanaRegistroSalida(controladorParqueadero, ventanaNuevoCliente, controladorCliente, controladorVehiculo);
+        this.ventanaRegistros = new VentanaRegistros(controladorParqueadero, ventanaNuevoRegistro, ventanaRegistroSalida, controladorVehiculo);
+        
+        
         
     }
 
@@ -81,10 +94,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         return jMenuItemFacturas;
     }
 
-    public JMenuItem getjMenuItemRegistros() {
-        return jMenuItemRegistros;
-    }
-
     public JMenuItem getjMenuItemAdministrador() {
         return jMenuItemAdministrador;
     }
@@ -92,7 +101,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     public JMenuItem getjMenuItemUsuarioSimple() {
         return jMenuItemUsuarioSimple;
     }
-    
+
+    public JMenuItem getjMenuItemEstacionamientos() {
+        return jMenuItemEstacionamientos;
+    }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -100,7 +112,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         menuBar = new javax.swing.JMenuBar();
-        jMenuVehiculos = new javax.swing.JMenu();
+        jMenuAdministrar = new javax.swing.JMenu();
         jMenuParqueaderos = new javax.swing.JMenu();
         jMenuItemNuevoParqueadero = new javax.swing.JMenuItem();
         jMenuItemEditarParqueadero = new javax.swing.JMenuItem();
@@ -108,16 +120,19 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jMenuUsuarios = new javax.swing.JMenu();
         jMenuItemNuevoUsuario = new javax.swing.JMenuItem();
         jMenuItemEditarUsuarios = new javax.swing.JMenuItem();
+        jMenuItemEstacionamientos = new javax.swing.JMenuItem();
         jMenuContratos = new javax.swing.JMenu();
         jMenuItemNuevoContrato = new javax.swing.JMenuItem();
         jMenuItemEditarContratos = new javax.swing.JMenuItem();
         jMenuClientes = new javax.swing.JMenu();
         jMenuItemNuevoCliente = new javax.swing.JMenuItem();
         jMenuItemEditarClientes = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
+        jMenuVehiculos = new javax.swing.JMenu();
         jMenuItemNuevoVehiculo = new javax.swing.JMenuItem();
         jMenuItemEditarVehiculos = new javax.swing.JMenuItem();
-        jMenuItemRegistros = new javax.swing.JMenuItem();
+        jMenuRegistros = new javax.swing.JMenu();
+        jMenuItemNuevoRegistro = new javax.swing.JMenuItem();
+        jMenuItemVerRegistros = new javax.swing.JMenuItem();
         jMenuItemFacturas = new javax.swing.JMenuItem();
         jMenuItemSalir = new javax.swing.JMenuItem();
         jMenuMCuenta = new javax.swing.JMenu();
@@ -152,11 +167,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         menuBar.setBackground(new java.awt.Color(136, 173, 176));
 
-        jMenuVehiculos.setBackground(new java.awt.Color(136, 173, 176));
-        jMenuVehiculos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/administracion (2).png"))); // NOI18N
-        jMenuVehiculos.setMnemonic('f');
-        jMenuVehiculos.setText("Administrar      ");
-        jMenuVehiculos.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jMenuAdministrar.setBackground(new java.awt.Color(136, 173, 176));
+        jMenuAdministrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/administracion (2).png"))); // NOI18N
+        jMenuAdministrar.setMnemonic('f');
+        jMenuAdministrar.setText("Administrar      ");
+        jMenuAdministrar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
 
         jMenuParqueaderos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/estacionamiento.png"))); // NOI18N
         jMenuParqueaderos.setText("Parqueaderos");
@@ -192,7 +207,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
         jMenuParqueaderos.add(jMenuItemCambiarParqueadero);
 
-        jMenuVehiculos.add(jMenuParqueaderos);
+        jMenuAdministrar.add(jMenuParqueaderos);
 
         jMenuUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/persona-de-negocios.png"))); // NOI18N
         jMenuUsuarios.setText("Usuarios");
@@ -216,7 +231,19 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
         jMenuUsuarios.add(jMenuItemEditarUsuarios);
 
-        jMenuVehiculos.add(jMenuUsuarios);
+        jMenuAdministrar.add(jMenuUsuarios);
+
+        jMenuItemEstacionamientos.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItemEstacionamientos.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jMenuItemEstacionamientos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/estacionamiento-de-autos.png"))); // NOI18N
+        jMenuItemEstacionamientos.setMnemonic('a');
+        jMenuItemEstacionamientos.setText("Estacionamientos");
+        jMenuItemEstacionamientos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemEstacionamientosActionPerformed(evt);
+            }
+        });
+        jMenuAdministrar.add(jMenuItemEstacionamientos);
 
         jMenuContratos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/contrato.png"))); // NOI18N
         jMenuContratos.setText("Contratos");
@@ -240,7 +267,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
         jMenuContratos.add(jMenuItemEditarContratos);
 
-        jMenuVehiculos.add(jMenuContratos);
+        jMenuAdministrar.add(jMenuContratos);
 
         jMenuClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/cliente.png"))); // NOI18N
         jMenuClientes.setText("Clientes");
@@ -264,11 +291,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
         jMenuClientes.add(jMenuItemEditarClientes);
 
-        jMenuVehiculos.add(jMenuClientes);
+        jMenuAdministrar.add(jMenuClientes);
 
-        jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/coche.png"))); // NOI18N
-        jMenu3.setText("Vehiculos");
-        jMenu3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jMenuVehiculos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/coche.png"))); // NOI18N
+        jMenuVehiculos.setText("Vehiculos");
+        jMenuVehiculos.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
         jMenuItemNuevoVehiculo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/nuevo.png"))); // NOI18N
         jMenuItemNuevoVehiculo.setText("Nuevo Vehiculo");
@@ -277,7 +304,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 jMenuItemNuevoVehiculoActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItemNuevoVehiculo);
+        jMenuVehiculos.add(jMenuItemNuevoVehiculo);
 
         jMenuItemEditarVehiculos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/lapiz.png"))); // NOI18N
         jMenuItemEditarVehiculos.setText("Editar Vehiculos");
@@ -286,22 +313,44 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 jMenuItemEditarVehiculosActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItemEditarVehiculos);
+        jMenuVehiculos.add(jMenuItemEditarVehiculos);
 
-        jMenuVehiculos.add(jMenu3);
+        jMenuAdministrar.add(jMenuVehiculos);
 
-        jMenuItemRegistros.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        jMenuItemRegistros.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jMenuItemRegistros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/verificar.png"))); // NOI18N
-        jMenuItemRegistros.setMnemonic('a');
-        jMenuItemRegistros.setText("Registros");
-        jMenuVehiculos.add(jMenuItemRegistros);
+        jMenuRegistros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/verificar.png"))); // NOI18N
+        jMenuRegistros.setText("Registros");
+        jMenuRegistros.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+
+        jMenuItemNuevoRegistro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/nuevo.png"))); // NOI18N
+        jMenuItemNuevoRegistro.setText("Nuevo Registro");
+        jMenuItemNuevoRegistro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemNuevoRegistroActionPerformed(evt);
+            }
+        });
+        jMenuRegistros.add(jMenuItemNuevoRegistro);
+
+        jMenuItemVerRegistros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/lapiz.png"))); // NOI18N
+        jMenuItemVerRegistros.setText("Ver Registros");
+        jMenuItemVerRegistros.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemVerRegistrosActionPerformed(evt);
+            }
+        });
+        jMenuRegistros.add(jMenuItemVerRegistros);
+
+        jMenuAdministrar.add(jMenuRegistros);
 
         jMenuItemFacturas.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jMenuItemFacturas.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jMenuItemFacturas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/factura.png"))); // NOI18N
         jMenuItemFacturas.setText("Facturas");
-        jMenuVehiculos.add(jMenuItemFacturas);
+        jMenuItemFacturas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemFacturasActionPerformed(evt);
+            }
+        });
+        jMenuAdministrar.add(jMenuItemFacturas);
 
         jMenuItemSalir.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jMenuItemSalir.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -313,9 +362,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 jMenuItemSalirActionPerformed(evt);
             }
         });
-        jMenuVehiculos.add(jMenuItemSalir);
+        jMenuAdministrar.add(jMenuItemSalir);
 
-        menuBar.add(jMenuVehiculos);
+        menuBar.add(jMenuAdministrar);
 
         jMenuMCuenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/usuario (2).png"))); // NOI18N
         jMenuMCuenta.setText("Mi Cuenta      ");
@@ -426,6 +475,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void jMenuItemNuevoContratoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemNuevoContratoActionPerformed
         ventanaNuevoContrato.setVisible(true);
+        ventanaNuevoContrato.restaurar();
     }//GEN-LAST:event_jMenuItemNuevoContratoActionPerformed
 
     private void jMenuItemNuevoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemNuevoClienteActionPerformed
@@ -463,12 +513,31 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemUsuarioSimpleActionPerformed
 
     private void jMenuItemEditarContratosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemEditarContratosActionPerformed
-        // TODO add your handling code here:
+        ventanaContratos.setVisible(true);
+        ventanaContratos.restaurar();
     }//GEN-LAST:event_jMenuItemEditarContratosActionPerformed
+
+    private void jMenuItemFacturasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemFacturasActionPerformed
+        ventanaFacturas.setVisible(true);
+    }//GEN-LAST:event_jMenuItemFacturasActionPerformed
+
+    private void jMenuItemEstacionamientosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemEstacionamientosActionPerformed
+        ventanaEstacionamientos.setVisible(true);
+        ventanaEstacionamientos.restaurar();
+    }//GEN-LAST:event_jMenuItemEstacionamientosActionPerformed
+
+    private void jMenuItemNuevoRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemNuevoRegistroActionPerformed
+        ventanaRegistros.setVisible(true);
+        ventanaRegistros.restaurar();
+    }//GEN-LAST:event_jMenuItemNuevoRegistroActionPerformed
+
+    private void jMenuItemVerRegistrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemVerRegistrosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItemVerRegistrosActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenuAdministrar;
     private javax.swing.JMenu jMenuAjustes;
     private javax.swing.JMenu jMenuClientes;
     private javax.swing.JMenu jMenuColor;
@@ -482,19 +551,22 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemEditarUsuarios;
     private javax.swing.JMenuItem jMenuItemEditarVehiculos;
     private javax.swing.JMenuItem jMenuItemEspañol;
+    private javax.swing.JMenuItem jMenuItemEstacionamientos;
     private javax.swing.JMenuItem jMenuItemFacturas;
     private javax.swing.JMenuItem jMenuItemIngles;
     private javax.swing.JMenuItem jMenuItemNuevoCliente;
     private javax.swing.JMenuItem jMenuItemNuevoContrato;
     private javax.swing.JMenuItem jMenuItemNuevoParqueadero;
+    private javax.swing.JMenuItem jMenuItemNuevoRegistro;
     private javax.swing.JMenuItem jMenuItemNuevoUsuario;
     private javax.swing.JMenuItem jMenuItemNuevoVehiculo;
-    private javax.swing.JMenuItem jMenuItemRegistros;
     private javax.swing.JMenuItem jMenuItemRestaurar;
     private javax.swing.JMenuItem jMenuItemSalir;
     private javax.swing.JMenuItem jMenuItemUsuarioSimple;
+    private javax.swing.JMenuItem jMenuItemVerRegistros;
     private javax.swing.JMenu jMenuMCuenta;
     private javax.swing.JMenu jMenuParqueaderos;
+    private javax.swing.JMenu jMenuRegistros;
     private javax.swing.JMenu jMenuUsuarios;
     private javax.swing.JMenu jMenuVehiculos;
     private javax.swing.JPanel jPanel1;

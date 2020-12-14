@@ -5,24 +5,30 @@
  */
 package ec.edu.ups.modelo;
 
+import ec.edu.ups.controlador.ListaContrato;
+import ec.edu.ups.controlador.ListaFacturas;
+import ec.edu.ups.controlador.ListaRegistroEstacionamiento;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  *
  * @author ariel
  */
-public class Parqueadero implements Serializable{
-    
+public class Parqueadero implements Serializable {
+
     private int id;
     private String nombre;
     private String direccion;
     private double costoPorHora;
     private int totalEspacios;
     private int espaciosDisponibles;
-    private List<Contrato> contratos;
-    private List<RegistroEstacionamiento> registroEstacionamientos;
-    private List<Factura> facturas;
+    private ListaContrato contratos;
+    private ListaRegistroEstacionamiento registros;
+    private ListaFacturas facturas;
+    private List<Estacionamiento> estacionamientos;
 
     public Parqueadero() {
     }
@@ -37,8 +43,16 @@ public class Parqueadero implements Serializable{
         this.direccion = direccion;
         this.costoPorHora = costoPorHora;
         this.totalEspacios = totalEspacios;
+        this.estacionamientos = new ArrayList<>();
+        this.contratos = new ListaContrato();
+        this.registros = new ListaRegistroEstacionamiento();
+        this.facturas = new ListaFacturas();
+
+        for (int i = 0; i < totalEspacios; i++) {
+            estacionamientos.add(new Estacionamiento(i + 1));
+        }
     }
-    
+
     public int getId() {
         return id;
     }
@@ -87,30 +101,26 @@ public class Parqueadero implements Serializable{
         this.espaciosDisponibles = espaciosDisponibles;
     }
 
-    public List<Contrato> getContratos() {
+    public ListaContrato getContratos() {
         return contratos;
     }
 
-    public void setContratos(List<Contrato> contratos) {
-        this.contratos = contratos;
+    public ListaRegistroEstacionamiento getRegistros() {
+        return registros;
     }
 
-    public List<RegistroEstacionamiento> getRegistroEstacionamientos() {
-        return registroEstacionamientos;
-    }
-
-    public void setRegistroEstacionamientos(List<RegistroEstacionamiento> registroEstacionamientos) {
-        this.registroEstacionamientos = registroEstacionamientos;
-    }
-
-    public List<Factura> getFacturas() {
+    public ListaFacturas getFacturas() {
         return facturas;
     }
 
-    public void setFacturas(List<Factura> facturas) {
-        this.facturas = facturas;
+    public List<Estacionamiento> getEstacionamientos() {
+        return estacionamientos;
     }
-    
+
+    public void setEstacionamientos(List<Estacionamiento> estacionamientos) {
+        this.estacionamientos = estacionamientos;
+    }
+
     @Override
     public int hashCode() {
         int hash = 5;
@@ -140,6 +150,48 @@ public class Parqueadero implements Serializable{
     public String toString() {
         return nombre;
     }
-    
-    
+
+    public void agregarEstacionamiento() {
+        if (!estacionamientos.isEmpty()) {
+            estacionamientos.add(new Estacionamiento(estacionamientos.get(estacionamientos.size() - 1).getNumero() + 1));
+        } else {
+            estacionamientos.add(new Estacionamiento(1));
+        }
+        totalEspacios++;
+    }
+
+    public boolean eliminarEstacionamiento(Estacionamiento estacionamiento) {
+        if (estacionamiento.getEstado().equals("Ocupado") || estacionamiento.getEstado().equals("Rentado")) {
+            return false;
+        } else {
+            estacionamientos.remove(estacionamiento);
+            totalEspacios--;
+            return true;
+        }
+
+    }
+
+    public Estacionamiento buscarEstacionamiento(String nombre) {
+        return estacionamientos.stream().filter(p -> p.getNombre().equals(nombre)).findFirst().orElse(null);
+    }
+
+    public boolean actualizarEstacionamiento(Estacionamiento estacionamiento) {
+        if (estacionamientos.contains(estacionamiento)) {
+            estacionamientos.set(estacionamientos.indexOf(estacionamiento), estacionamiento);
+        }
+        return false;
+    }
+
+    public List<Estacionamiento> getEstacionamientosDisponibles() {
+        return estacionamientos.stream().filter(e -> e.getEstado().equals("Disponible")).collect(Collectors.toList());
+    }
+
+    public long numeroDeVehiculosEstacionados() {
+        return estacionamientos.stream().filter(estacionamiento -> (estacionamiento.getVehiculo() != null)).filter(estacionamiento -> (estacionamiento.getVehiculo().getTipo().equals("Vehiculo"))).count();
+
+    }
+
+    public long numeroDeMotocicletasEstacionadas() {
+        return estacionamientos.stream().filter(estacionamiento -> (estacionamiento.getVehiculo() != null)).filter(estacionamiento -> (estacionamiento.getVehiculo().getTipo().equals("Motocicleta"))).count();
+    }
 }

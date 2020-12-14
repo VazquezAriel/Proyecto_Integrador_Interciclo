@@ -232,6 +232,8 @@ public class VentanaCambiarParqueadero extends javax.swing.JFrame {
     private void jButtonSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSeleccionarActionPerformed
         controladorParqueadero.actualizar(controladorParqueadero.getParqueaderoActual());
         controladorParqueadero.setParqueaderoActual(getParqueaderoSeleccionado());
+        JOptionPane.showMessageDialog(this, "Parqueadero Actual establecido con exito");
+        setVisible(false);
     }//GEN-LAST:event_jButtonSeleccionarActionPerformed
 
     private void jButtonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalirActionPerformed

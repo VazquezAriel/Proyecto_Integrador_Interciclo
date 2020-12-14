@@ -8,6 +8,7 @@ package ec.edu.ups.vista;
 import ec.edu.ups.controlador.ControladorCliente;
 import ec.edu.ups.modelo.Cliente;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /**
  *
@@ -16,6 +17,8 @@ import javax.swing.JOptionPane;
 public class VentanaNuevoCliente extends javax.swing.JFrame {
     
     private ControladorCliente controladorCliente;
+    private VentanaNuevoContrato ventanaNuevoContrato;
+    private VentanaRegistroSalida ventanaRegistroSalida;
 
     public VentanaNuevoCliente(ControladorCliente controladorCliente) {
         initComponents();
@@ -35,6 +38,18 @@ public class VentanaNuevoCliente extends javax.swing.JFrame {
     public boolean datosLlenos() {
         return !(jTextFieldNombre.getText().isEmpty() || jTextFieldApellido.getText().isEmpty() || jTextFieldDireccion.getText().isEmpty() || jTextFieldTelefono.getText().isEmpty()
                 || jTextFieldEmail.getText().isEmpty() || jTextFieldCedula.getText().isEmpty());
+    }
+
+    public void setVentanaNuevoContrato(VentanaNuevoContrato ventanaNuevoContrato) {
+        this.ventanaNuevoContrato = ventanaNuevoContrato;
+    }
+
+    public void setVentanaRegistroSalida(VentanaRegistroSalida ventanaRegistroSalida) {
+        this.ventanaRegistroSalida = ventanaRegistroSalida;
+    }
+
+    public JTextField getjTextFieldCedula() {
+        return jTextFieldCedula;
     }
     
     @SuppressWarnings("unchecked")
@@ -240,8 +255,24 @@ public class VentanaNuevoCliente extends javax.swing.JFrame {
 
     private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
         if (datosLlenos()) {
-            controladorCliente.crear(new Cliente(jTextFieldCedula.getText(), controladorCliente.generarId() ,jTextFieldNombre.getText(), jTextFieldApellido.getText(), jTextFieldDireccion.getText(), jTextFieldTelefono.getText(), jTextFieldEmail.getText()));
+            Cliente cliente = new Cliente(jTextFieldCedula.getText(), controladorCliente.generarId() ,jTextFieldNombre.getText(), jTextFieldApellido.getText(), jTextFieldDireccion.getText(), jTextFieldTelefono.getText(), jTextFieldEmail.getText());
+            controladorCliente.crear(cliente);
             JOptionPane.showMessageDialog(this, "Cliente Agregado con exito");
+            
+            if (ventanaNuevoContrato != null) {
+                ventanaNuevoContrato.getjTextFieldApellidoCliente().setText(cliente.getApellido());
+                ventanaNuevoContrato.getjTextFieldNombreCliente().setText(cliente.getNombre());
+                ventanaNuevoContrato.getjTextFieldID().setText(String.valueOf(cliente.getId()));
+                ventanaNuevoContrato = null;
+            }
+            
+            if (ventanaRegistroSalida != null) {
+                ventanaRegistroSalida.getjTextFieldApellidoCliente().setText(cliente.getApellido());
+                ventanaRegistroSalida.getjTextFieldNombreCliente().setText(cliente.getNombre());
+                ventanaRegistroSalida.getjTextFieldID().setText(String.valueOf(cliente.getId()));
+                ventanaRegistroSalida = null;
+            }
+            
             this.setVisible(false);
             restaurar();
         } else {

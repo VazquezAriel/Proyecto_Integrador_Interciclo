@@ -5,29 +5,74 @@
  */
 package ec.edu.ups.modelo;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 /**
  *
  * @author ariel
  */
-public class Contrato {
-    
+public class Contrato implements Serializable {
+
     private int id;
     private Cliente cliente;
     private int duracionEnDias;
+    private double descuento;
+    private double costoTotal;
     private LocalDate inicioContrato;
     private LocalDate finContrato;
+    private Estacionamiento estacionamiento;
+    private boolean facturado;
 
     public Contrato() {
     }
 
-    public Contrato(int id, Cliente cliente, int duracionEnDias, LocalDate inicioContrato, LocalDate finContrato) {
+    public Contrato(int id) {
+        this.id = id;
+    }
+
+    public Contrato(int id, Cliente cliente, int duracionEnDias, double descuento, double costoTotal, LocalDate inicioContrato, LocalDate finContrato, Estacionamiento estacionamiento) {
         this.id = id;
         this.cliente = cliente;
         this.duracionEnDias = duracionEnDias;
+        this.descuento = descuento;
+        this.costoTotal = costoTotal;
         this.inicioContrato = inicioContrato;
         this.finContrato = finContrato;
+        this.estacionamiento = estacionamiento;
+        this.facturado = false;
+    }
+
+    public Estacionamiento getEstacionamiento() {
+        return estacionamiento;
+    }
+
+    public void setEstacionamiento(Estacionamiento estacionamiento) {
+        this.estacionamiento = estacionamiento;
+    }
+
+    public boolean isFacturado() {
+        return facturado;
+    }
+
+    public void setFacturado(boolean facturado) {
+        this.facturado = facturado;
+    }
+
+    public double getDescuento() {
+        return descuento;
+    }
+
+    public void setDescuento(double descuento) {
+        this.descuento = descuento;
+    }
+
+    public double getCostoTotal() {
+        return costoTotal;
+    }
+
+    public void setCostoTotal(double costoTotal) {
+        this.costoTotal = costoTotal;
     }
 
     public int getId() {
@@ -45,7 +90,7 @@ public class Contrato {
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
-    
+
     public int getDuracionEnDias() {
         return duracionEnDias;
     }

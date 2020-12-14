@@ -29,4 +29,13 @@ public class ControladorVehiculo extends ControladorGenerico<Vehiculo> {
     public List<Vehiculo> buscarPorColor(String color) {
         return getListado().stream().filter(v -> v.getColor().equals(color)).collect(Collectors.toList());
     }
+    
+    public Vehiculo obtenerCliente(String placa) {
+        for (Vehiculo vehiculo : getListado()) {
+            if (vehiculo.getPlaca().equals(placa)) {
+                return vehiculo;
+            }
+        }
+        return null;
+    }
 }

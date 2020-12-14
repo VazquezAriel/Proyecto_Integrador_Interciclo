@@ -265,10 +265,9 @@ public class VentanaInicioSecion extends javax.swing.JFrame {
                 ventanaPrincipal.getjMenuUsuarios().setEnabled(true);
                 ventanaPrincipal.getjMenuItemUsuarioSimple().setEnabled(false);
                 ventanaPrincipal.getjMenuItemAdministrador().setEnabled(true);
+                ventanaPrincipal.getjMenuItemEstacionamientos().setEnabled(true);
 
                 if (controladorParqueadero.getListado().isEmpty()) {
-                    ventanaPrincipal.getjMenuItemRegistros().setEnabled(false);
-                    ventanaPrincipal.getjMenuItemFacturas().setEnabled(false);
                 } else {
                     controladorParqueadero.setParqueaderoActual(controladorParqueadero.getListado().get(0));
                 }
@@ -284,8 +283,7 @@ public class VentanaInicioSecion extends javax.swing.JFrame {
                 ventanaPrincipal.setVisible(true);
                 ventanaPrincipal.getjMenuParqueaderos().setEnabled(false);
                 ventanaPrincipal.getjMenuUsuarios().setEnabled(false);
-                ventanaPrincipal.getjMenuItemRegistros().setEnabled(true);
-                ventanaPrincipal.getjMenuItemFacturas().setEnabled(true);
+                ventanaPrincipal.getjMenuItemEstacionamientos().setEnabled(false);
                 ventanaPrincipal.getjMenuItemUsuarioSimple().setEnabled(true);
                 ventanaPrincipal.getjMenuItemAdministrador().setEnabled(false);
                 controladorParqueadero.setParqueaderoActual(controladorUsuario.getUsuarioLogeado().getParqueadero());

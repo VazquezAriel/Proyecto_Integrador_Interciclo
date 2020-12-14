@@ -33,4 +33,13 @@ public class ControladorCliente extends ControladorGenerico<Cliente>{
     public List<Cliente> buscarPorApellido(String apellido) {
         return getListado().stream().filter(p -> p.getApellido().equals(apellido)).collect(Collectors.toList());
     }
+    
+    public Cliente obtenerCliente(String cedula) {
+        for (Cliente cliente : getListado()) {
+            if (cliente.getCedula().equals(cedula)) {
+                return cliente;
+            }
+        }
+        return null;
+    }
 }

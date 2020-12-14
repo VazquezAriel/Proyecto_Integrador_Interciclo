@@ -16,17 +16,37 @@ public class Vehiculo implements Serializable{
     private int id;
     private String placa;
     private String color;
+    private String tipo;
+    private boolean parqueado;
 
     public Vehiculo(int id) {
         this.id = id;
     }
 
-    public Vehiculo(int id, String placa, String color) {
+    public Vehiculo(int id, String placa, String color, String tipo) {
         this.id = id;
         this.placa = placa;
         this.color = color;
+        this.tipo = tipo;
+        this.parqueado = false;
     }
 
+    public boolean isParqueado() {
+        return parqueado;
+    }
+
+    public void setParqueado(boolean parqueado) {
+        this.parqueado = parqueado;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+    
     public String getPlaca() {
         return placa;
     }

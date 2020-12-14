@@ -8,6 +8,7 @@ package ec.edu.ups.vista;
 import ec.edu.ups.controlador.ControladorVehiculo;
 import ec.edu.ups.modelo.Vehiculo;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /**
  *
@@ -15,7 +16,8 @@ import javax.swing.JOptionPane;
  */
 public class VentanaNuevoVehiculo extends javax.swing.JFrame {
 
-    ControladorVehiculo controladorVehiculo;
+    private ControladorVehiculo controladorVehiculo;
+    private VentanaNuevoRegistro ventanaNuevoRegistro;
     
     public VentanaNuevoVehiculo(ControladorVehiculo controladorVehiculo) {
         initComponents();
@@ -25,7 +27,18 @@ public class VentanaNuevoVehiculo extends javax.swing.JFrame {
     public void restaurar() {
         jTextFieldColor.setText("");
         jTextFieldPlaca.setText("");
+        jComboBoxTipo.setSelectedIndex(0);
     }
+
+    public void setVentanaNuevoRegistro(VentanaNuevoRegistro ventanaNuevoRegistro) {
+        this.ventanaNuevoRegistro = ventanaNuevoRegistro;
+    }
+
+    public JTextField getjTextFieldPlaca() {
+        return jTextFieldPlaca;
+    }
+    
+    
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -41,6 +54,8 @@ public class VentanaNuevoVehiculo extends javax.swing.JFrame {
         jTextFieldColor = new javax.swing.JTextField();
         jButtonGuardar = new javax.swing.JButton();
         jButtonSalir = new javax.swing.JButton();
+        jLabelPlaca1 = new javax.swing.JLabel();
+        jComboBoxTipo = new javax.swing.JComboBox<>();
 
         setResizable(false);
 
@@ -104,6 +119,12 @@ public class VentanaNuevoVehiculo extends javax.swing.JFrame {
             }
         });
 
+        jLabelPlaca1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabelPlaca1.setText("Tipo:");
+
+        jComboBoxTipo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jComboBoxTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Vehiculo", "Motocicleta" }));
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -113,17 +134,21 @@ public class VentanaNuevoVehiculo extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(2, 2, 2)
-                        .addComponent(jButtonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(50, 50, 50)
-                        .addComponent(jButtonGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jButtonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(50, 50, 50)
+                                .addComponent(jButtonGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabelPlaca1)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabelColor)
                             .addComponent(jLabelPlaca))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextFieldColor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldPlaca, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jTextFieldPlaca, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jComboBoxTipo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(51, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -137,7 +162,11 @@ public class VentanaNuevoVehiculo extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelColor)
                     .addComponent(jTextFieldColor, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelPlaca1)
+                    .addComponent(jComboBoxTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -165,8 +194,17 @@ public class VentanaNuevoVehiculo extends javax.swing.JFrame {
 
     private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
         if (!jTextFieldColor.getText().isEmpty() || !jTextFieldPlaca.getText().isEmpty()) {
-            controladorVehiculo.crear(new Vehiculo(controladorVehiculo.generarId(), jTextFieldPlaca.getText(), jTextFieldColor.getText()));
+            Vehiculo vehiculo = new Vehiculo(controladorVehiculo.generarId(), jTextFieldPlaca.getText(), jTextFieldColor.getText(), jComboBoxTipo.getSelectedItem().toString());
+            controladorVehiculo.crear(vehiculo);
             JOptionPane.showMessageDialog(this, "Vehiculo Agregado con exito");
+            
+            if (ventanaNuevoRegistro != null) {
+                ventanaNuevoRegistro.getjTextFieldColor().setText(vehiculo.getColor());
+                ventanaNuevoRegistro.getjTextFieldID().setText(String.valueOf(vehiculo.getId()));
+                ventanaNuevoRegistro.getjTextFieldTipo().setText(vehiculo.getTipo());
+                ventanaNuevoRegistro = null;
+            }
+            
             restaurar();
             this.setVisible(false);
         } else {
@@ -182,10 +220,12 @@ public class VentanaNuevoVehiculo extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonGuardar;
     private javax.swing.JButton jButtonSalir;
+    private javax.swing.JComboBox<String> jComboBoxTipo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelColor;
     private javax.swing.JLabel jLabelNuevoVehiculo;
     private javax.swing.JLabel jLabelPlaca;
+    private javax.swing.JLabel jLabelPlaca1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField jTextFieldColor;

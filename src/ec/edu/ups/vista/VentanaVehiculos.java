@@ -40,6 +40,7 @@ public class VentanaVehiculos extends javax.swing.JFrame {
         jTextFieldColor.setEnabled(condicion);
         jButtonGuardar.setEnabled(condicion);
         jButtonEliminar.setEnabled(condicion);
+        jComboBoxTipo.setEnabled(condicion);
     }
     
     public boolean datosLlenos() {
@@ -55,7 +56,7 @@ public class VentanaVehiculos extends javax.swing.JFrame {
         modelo.setRowCount(0);
         
         for (Vehiculo v : listado) {
-            Object[] rowData = {v.getId(), v.getPlaca(), v.getColor()};
+            Object[] rowData = {v.getId(), v.getPlaca(), v.getColor(), v.getTipo()};
             modelo.addRow(rowData);
         }
         jTableVehiculos.setModel(modelo);
@@ -87,6 +88,8 @@ public class VentanaVehiculos extends javax.swing.JFrame {
         jButtonGuardar = new javax.swing.JButton();
         jButtonEliminar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        jLabelPlaca1 = new javax.swing.JLabel();
+        jComboBoxTipo = new javax.swing.JComboBox<>();
 
         setResizable(false);
 
@@ -104,14 +107,14 @@ public class VentanaVehiculos extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Placa", "Color"
+                "ID", "Placa", "Color", "Tipo"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -257,10 +260,20 @@ public class VentanaVehiculos extends javax.swing.JFrame {
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/camion.png"))); // NOI18N
 
+        jLabelPlaca1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabelPlaca1.setText("Tipo:");
+
+        jComboBoxTipo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jComboBoxTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Vehiculo", "Motocicleta" }));
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(90, 90, 90)
+                .addComponent(jLabel2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
@@ -280,25 +293,28 @@ public class VentanaVehiculos extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(jTextFieldPlaca))
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabelColor)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextFieldColor)))))
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabelColor)
+                                    .addComponent(jLabelPlaca1))
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jTextFieldColor))
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addGap(81, 81, 81)
+                                        .addComponent(jComboBoxTipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))))
                 .addContainerGap())
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(90, 90, 90)
-                .addComponent(jLabel2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(33, 33, 33)
                 .addComponent(jLabel2)
-                .addGap(37, 37, 37)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelNombre1)
-                    .addComponent(jTextFieldID, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldID, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelNombre1))
+                .addGap(19, 19, 19)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelPlaca)
                     .addComponent(jTextFieldPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -306,6 +322,10 @@ public class VentanaVehiculos extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelColor)
                     .addComponent(jTextFieldColor, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBoxTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelPlaca1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -337,6 +357,7 @@ public class VentanaVehiculos extends javax.swing.JFrame {
         jTextFieldID.setText(String.valueOf(vehiculoSeleccionado.getId()));
         jTextFieldPlaca.setText(vehiculoSeleccionado.getPlaca());
         jTextFieldColor.setText(vehiculoSeleccionado.getColor());
+        jComboBoxTipo.setSelectedItem(vehiculoSeleccionado.getTipo());
         habilitarEdicion(true);
     }//GEN-LAST:event_jTableVehiculosMouseClicked
 
@@ -373,7 +394,7 @@ public class VentanaVehiculos extends javax.swing.JFrame {
 
     private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
         if (datosLlenos()) {
-            controladorVehiculo.actualizar(new Vehiculo(Integer.valueOf(jTextFieldID.getText()) ,jTextFieldPlaca.getText(), jTextFieldColor.getText()));
+            controladorVehiculo.actualizar(new Vehiculo(Integer.valueOf(jTextFieldID.getText()) ,jTextFieldPlaca.getText(), jTextFieldColor.getText(), jComboBoxTipo.getSelectedItem().toString()));
             JOptionPane.showMessageDialog(this, "Vehiculo Actualizado con exito");
             restaurar();
         } else {
@@ -396,11 +417,13 @@ public class VentanaVehiculos extends javax.swing.JFrame {
     private javax.swing.JButton jButtonMostrarTodo;
     private javax.swing.JButton jButtonSalir;
     private javax.swing.JComboBox<String> jComboBoxBusqueda;
+    private javax.swing.JComboBox<String> jComboBoxTipo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabelColor;
     private javax.swing.JLabel jLabelNombre1;
     private javax.swing.JLabel jLabelPlaca;
+    private javax.swing.JLabel jLabelPlaca1;
     private javax.swing.JLabel jLabelVehiculosRegistrados;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

@@ -227,7 +227,9 @@ public class VentanaNuevoParqueadero extends javax.swing.JFrame {
 
     private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
         if (datosLlenos()) {
-            controladorParqueadero.crear(new Parqueadero(controladorParqueadero.generarId(), jTextFieldNombre.getText(), jTextFieldDireccion.getText(), Double.parseDouble(jTextFieldCostoPorHora.getText()), Integer.parseInt(jTextFieldNumeroEstacionamientos.getText())));
+            Parqueadero parqueaderoCreado = new Parqueadero(controladorParqueadero.generarId(), jTextFieldNombre.getText(), jTextFieldDireccion.getText(), Double.parseDouble(jTextFieldCostoPorHora.getText()), Integer.parseInt(jTextFieldNumeroEstacionamientos.getText()));
+            controladorParqueadero.crear(parqueaderoCreado);
+            controladorParqueadero.setParqueaderoActual(parqueaderoCreado);
             JOptionPane.showMessageDialog(this, "Parqueadero Agregado con exito");
             this.setVisible(false);
             restaurar();
