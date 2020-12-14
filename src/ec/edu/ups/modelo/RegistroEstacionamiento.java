@@ -6,10 +6,7 @@
 package ec.edu.ups.modelo;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
 
 /**
  *

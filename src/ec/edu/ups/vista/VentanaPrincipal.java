@@ -41,6 +41,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private VentanaNuevoRegistro ventanaNuevoRegistro;
     private VentanaRegistros ventanaRegistros;
     private VentanaRegistroSalida ventanaRegistroSalida;
+    private VentanaVerRegistros ventanaVerRegistros;
     
     //Controladores
     ControladorCliente controladorCliente;
@@ -77,9 +78,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         this.ventanaNuevoRegistro = new VentanaNuevoRegistro(controladorParqueadero, controladorVehiculo, ventanaNuevoVehiculo);
         this.ventanaRegistroSalida = new VentanaRegistroSalida(controladorParqueadero, ventanaNuevoCliente, controladorCliente, controladorVehiculo);
         this.ventanaRegistros = new VentanaRegistros(controladorParqueadero, ventanaNuevoRegistro, ventanaRegistroSalida, controladorVehiculo);
-        
-        
-        
+        this.ventanaVerRegistros = new VentanaVerRegistros(controladorParqueadero);
     }
 
     public JMenu getjMenuParqueaderos() {
@@ -532,7 +531,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemNuevoRegistroActionPerformed
 
     private void jMenuItemVerRegistrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemVerRegistrosActionPerformed
-        // TODO add your handling code here:
+        ventanaVerRegistros.setVisible(true);
+        ventanaVerRegistros.restaurar();
     }//GEN-LAST:event_jMenuItemVerRegistrosActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
